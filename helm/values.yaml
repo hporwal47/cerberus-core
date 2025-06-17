@@ -39,11 +39,12 @@ resources:
 
 ## Environment variable to inject into cerberus pods
 ## It will generate a configmap with all key:values
-data: {}
-#  DATABASE_HOST: "database-service"
-#  DATABASE_PORT: 3306
-#  DATABASE_NAME: cerberus
-#  DATABASE_USER: cerberus
+data:
+ DATABASE_HOST: "cerberus-db.cjs6e2myy7q0.ca-central-1.rds.amazonaws.com"
+ DATABASE_PORT: 3306
+ DATABASE_NAME: cerberus-db
+ DATABASE_USER: admin
+ DATABASE_PASSWORD: CEREBRUS_4321
 #  CERBERUS_NAME: cerberus
 #  CATALINA_OPTS: "-Dorg.cerberus.environment=prd -Dorg.cerberus.authentification=none -Xmx1024m"
 
@@ -69,7 +70,7 @@ volumeMedia:
   # Storage path of media files corresponding to the cerberus_exeautomedia_path parameters
   mediaPath: /opt/cerberus/medias/
   storage: 20Gi
-  storageClassName: "" 
+  storageClassName: "ebs-csi" 
 
 service:
   name: cerberus-svc

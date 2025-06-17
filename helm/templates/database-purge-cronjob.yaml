@@ -1,15 +1,14 @@
 {{- if .Values.purge.enabled -}}
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ .Release.Name }}-database-purge
 spec:
+  schedule: {{ .Values.purge.schedule }}
   concurrencyPolicy: Forbid
-  successfulJobsHistoryLimit: {{ .Values.successHistoryLimit }}
-  failedJobsHistoryLimit: {{ .Values.failedHistoryLimit }}
+  successfulJobsHistoryLimit: {{ .Values.purge.successHistoryLimit }}
+  failedJobsHistoryLimit: {{ .Values.purge.failedHistoryLimit }}
   jobTemplate:
-    metadata:
-      name: {{ .Release.Name }}
     spec:
       template:
         metadata:
@@ -51,6 +50,5 @@ spec:
               name: {{ .Values.purge.configmap }}
           restartPolicy: OnFailure
           terminationGracePeriodSeconds: 30
-  schedule: {{ .Values.purge.schedule }}
   suspend: false
 {{- end -}}
