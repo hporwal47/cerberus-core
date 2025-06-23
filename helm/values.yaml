@@ -70,7 +70,7 @@ volumeMedia:
   # Storage path of media files corresponding to the cerberus_exeautomedia_path parameters
   mediaPath: /opt/cerberus/medias/
   storage: 20Gi
-  storageClassName: "ebs-csi" 
+  storageClassName: "gp2" 
 
 service:
   name: cerberus-svc
